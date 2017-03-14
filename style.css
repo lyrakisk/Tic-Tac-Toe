@@ -1,0 +1,64 @@
+*{
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body{
+  background-color: #f7cac9;
+}
+
+#container{
+  margin: 20px auto;
+  max-width: 330px;
+}
+
+#greet{
+  text-align: center;
+}
+
+#greet-message{
+  font-size: 25px;
+  font-weight: bold;
+  font-style: italic;
+  color: #034f84;
+}
+
+.row{
+  padding: 0;
+  display: flex;
+  margin: 0 auto;
+}
+
+.game-block{
+  height: 100px;
+  width: 100px;
+  margin: 5px 5px 5px 5px;
+  display: inline-block;
+  border:none;
+  border-radius: 10px;
+  background-color: #f7786b;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+.game-block:hover{
+  cursor: pointer;
+}
+
+.game-block:focus{
+  outline: none;
+}
+
+.game-block:active{
+  outline: none;
+  box-shadow: 6px 6px 5px #888888;
+  transform: translateY(4px);
+  transform: translateX(4px);
+}
+
+.block-value{
+  font-size: 70px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin: auto;
+}
