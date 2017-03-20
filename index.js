@@ -4,15 +4,15 @@ var playerSide = "";
 var computerSide = "";
 var turn = "X"; //Player X always starts first
 var choice;
-
-window.onload = function(){
-}
+var playerScore = 0;
+var computerScore = 0;
 
 function hideBoard(){
   var elements = document.getElementsByClassName("row");
   for(var i=0; i<elements.length; i++){
     elements[i].style.display = 'none';
   }
+  document.getElementById("score").style.display = 'none';
 }
 
 function showBoard(){
@@ -20,19 +20,28 @@ function showBoard(){
   for(var i=0; i<elements.length; i++){
     elements[i].style.display = 'flex';
   }
+  document.getElementById("score").style.display = 'block';
+  document.getElementById("player-score").innerHTML = playerScore;
+  document.getElementById("computer-score").innerHTML = computerScore;
 }
 
-function startGame(){
+function startGameFirstTime(){
   showBoard();
-  initialize();
+  initialize(); 
   if(turn==computerSide){
     computerMove();
   }
 }
 
+function startGame(){
+  setTimeout(function(){hideResult();showBoard();initialize(); if(turn==computerSide){
+    computerMove();
+  }},1000);
+}
+
 function initialize(){
   board = ["","","","","","","","",""];
-  for(var i=0; i<8; i++){
+  for(var i=0; i<=8; i++){
     var id= "block-" + i.toString();
     document.getElementById(id).innerHTML = board[i];
   }
@@ -60,10 +69,23 @@ function updateBoard(turn, position){
   }
 }
 
+
+
 function playerMove(position){
   if(turn==playerSide && !won(board) && board[position]==""){
     updateBoard(playerSide,position);
     turn = computerSide;
+    if(won(board)){
+      playerScore++;
+      showResult("You won!");
+      startGame();
+      return;
+    }
+    else if(isTie(board)){
+      showResult("It's a tie!");
+      startGame();
+      return;
+    }
     if(!won(board)){
       computerMove();
     }
@@ -75,7 +97,41 @@ function computerMove(){
     var currentScore = minimax(board,turn);
     updateBoard(computerSide,choice);
     turn = changeTurn(turn);
+    if(won(board)){
+      computerScore++;
+      showResult("Computer won!");
+      startGame();
+      return;
+    }
+    else if(isTie(board)){
+      showResult("It's a tie!");
+      startGame();
+      return;
+    }
   }
+}
+
+function showResult(result){
+  var elements = document.getElementsByClassName("row");
+  for(var i=0; i<elements.length; i++){
+    elements[i].className += " blur";
+  }
+  document.getElementById("end-of-game-text").innerHTML = result;
+  document.getElementById("end-of-game").style.display = 'block';
+}
+
+function hideResult(){
+  var elements = document.getElementsByClassName("row");
+  for(var i=0; i<elements.length; i++){
+    elements[i].classList.remove("blur");
+    document.getElementById("end-of-game").style.display = 'none';
+  }
+}
+
+function sleep(miliseconds) {
+   var currentTime = new Date().getTime();
+   while (currentTime + miliseconds >= new Date().getTime()) {
+   }
 }
 
 function score(board, turn){
@@ -103,7 +159,7 @@ function availableMoves(board){
 function minimax(board, turn){
   var scores = [];
   var moves = [];
-  if(won(board) || availableMoves(board)==0){
+  if(won(board) || isTie(board)){
     return score(board,turn);
   }
   var possibleMoves = availableMoves(board);
@@ -143,6 +199,15 @@ function changeTurn(turn){
   }
   else{
     return playerSide;
+  }
+}
+
+function isTie(board){
+  if(!won(board) && availableMoves(board)==0){
+    return true;
+  }
+  else{
+    return false;
   }
 }
 

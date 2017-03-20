@@ -7,6 +7,16 @@ body{
   background-color: #f7cac9;
 }
 
+div{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 #container{
   margin: 20px auto;
   max-width: 330px;
@@ -16,10 +26,26 @@ body{
   text-align: center;
 }
 
-#greet-message{
+#greet-message,.scores{
   font-size: 25px;
   font-weight: bold;
   font-style: italic;
+  color: #034f84;
+}
+
+#end-of-game{
+  width: 330px;
+  height: 330px;
+  position: absolute;
+  text-align: center;
+  z-index: 10;
+  display: none;
+}
+
+#end-of-game-text{
+  line-height: 330px;
+  font-size: 50px;
+  font-weight: bold;
   color: #034f84;
 }
 
@@ -27,6 +53,14 @@ body{
   padding: 0;
   display: flex;
   margin: 0 auto;
+}
+
+.blur{
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -ms-filter: blur(3px);
+  -o-filter: blur(3px);
+  filter: blur(3px);
 }
 
 .game-block{
@@ -61,4 +95,12 @@ body{
   color: white;
   text-align: center;
   margin: auto;
+}
+
+#score{
+  text-align: center;
+}
+
+p{
+  margin: 0;
 }

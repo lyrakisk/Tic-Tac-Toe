@@ -2,7 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Tic Tac Toe  v2</title>
+  <title>Tic Tac Toe </title>
   
   
   
@@ -15,8 +15,11 @@
   <div id="container">
   <div id="greet">
     <p id="greet-message">Play as:</p>
-    <button class="game-block" onclick="setSide('X');hideGreet();startGame();"><p class="block-value">X</p></button>
-    <button class="game-block" onclick="setSide('O');hideGreet();startGame();"><p class="block-value">O</p></button>
+    <button class="game-block" onclick="setSide('X');hideGreet();startGameFirstTime();"><p class="block-value">X</p></button>
+    <button class="game-block" onclick="setSide('O');hideGreet();startGameFirstTime();"><p class="block-value">O</p></button>
+  </div>
+  <div id="end-of-game">
+    <p id="end-of-game-text">It's a tie!</p>
   </div>
   <div class="row">
     <button class="game-block" onclick="playerMove(0)"><p class="block-value" id="block-0"></p></button>
@@ -33,7 +36,10 @@
     <button class="game-block" onclick="playerMove(7)"><p class="block-value" id="block-7"></p></button>
     <button class="game-block" onclick="playerMove(8)"><p class="block-value" id="block-8"></p></button>
   </div>
-  
+  <div id="score">
+    <p class="scores">Player: <span id='player-score'></span></p>
+    <p class="scores">Computer: <span id="computer-score"></span></p>
+  </div>
 </div>
   
     <script src="index.js"></script>
